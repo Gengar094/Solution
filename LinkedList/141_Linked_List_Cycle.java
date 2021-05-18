@@ -14,17 +14,18 @@ public class Solution {
         if (head == null) {
             return false;
         }
-        
-        ListNode p = head; // fast pointer
-        ListNode q = head; // slow pointer
 
-        while (p.next != null && q != null) {
-            p = p.next.next;
-            q = q.next;
+        ListNode slow = head;
+        ListNode fast = head;
 
-            if (p == q) return true;
+        // 如果无环，fast会先到null, fast.next也有可能为null
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
         }
-
         return false;
     }
 }
